@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<empresa>
+	<nombre>Mi Empresa S.L.</nombre>
+	<empleados>
+		<empleado>
+			<nombre>Jorge Perez Lopez</nombre>
+			<puesto>Gerente</puesto>
+			<edad>42</edad>
+			<sueldo>2300</sueldo>
+		</empleado>
+		<empleado>
+			<nombre>Ana Gomez Sanchez</nombre>
+			<puesto>Comercial</puesto>
+			<edad>23</edad>
+			<sueldo>900</sueldo>
+		</empleado>
+		<empleado>
+			<nombre>Felipe Rodriguez Ruiz</nombre>
+			<puesto>Jefe de equipo</puesto>
+			<edad>30</edad>
+			<sueldo>1500</sueldo>
+		</empleado>
+		<empleado>
+			<nombre>Lidia Gonzales Jimenez</nombre>
+			<puesto>Gerente adjunto</puesto>
+			<edad>38</edad>
+			<sueldo>1900</sueldo>
+		</empleado>
+		<empleado>
+			<nombre>Luis Enrique Nieto Roldan</nombre>
+			<puesto>Tecnico informatico</puesto>
+			<edad>27</edad>
+			<sueldo>1100</sueldo>
+		</empleado>
+	</empleados>
+</empresa>
