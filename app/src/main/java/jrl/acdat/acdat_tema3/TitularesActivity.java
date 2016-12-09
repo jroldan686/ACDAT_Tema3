@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -18,46 +19,45 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Ejercicio3Activity extends Activity implements AdapterView.OnItemClickListener {
+public class TitularesActivity extends Activity implements AdapterView.OnItemClickListener{
 
-    private static final String RSS = "http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/estacion-bicicleta.xml";
-
-    ListView lstvEstaciones;
-
+    String nombreSitio, enlaceSitio;
+    TextView txvSitio;
+    ListView lstvListaTitulares;
+    ArrayAdapter<Noticia> adapter;
+    ArrayList<Noticia> noticias = new ArrayList<Noticia>();
     Analisis analisis = null;
-    ArrayList<Estacion> estaciones = null;
-    ArrayAdapter<Estacion> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ejercicio3);
+        setContentView(R.layout.activity_titulares);
 
-        lstvEstaciones = (ListView) findViewById(R.id.lstvEstaciones);
-        lstvEstaciones.setOnItemClickListener(this);
+        Intent intent = getIntent();
+        nombreSitio = intent.getStringExtra("nombre");
+        enlaceSitio = intent.getStringExtra("enlace");
 
+        txvSitio = (TextView)findViewById(R.id.txvSitio);
+        lstvListaTitulares = (ListView)findViewById(R.id.lstvListaTitulares);
+        lstvListaTitulares.setOnItemClickListener(this);
+
+        txvSitio.setText(nombreSitio);
         analisis = new Analisis();
-        estaciones = new ArrayList<Estacion>();
 
-        descargarRSS(RSS);
+        descargarRSS(enlaceSitio);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, EstacionActivity.class);
-        intent.putExtra("title", estaciones.get(position).getTitle());
-        intent.putExtra("estado", estaciones.get(position).getEstado());
-        intent.putExtra("bicis", estaciones.get(position).getBicisDisponibles());
-        intent.putExtra("anclajes", estaciones.get(position).getAnclajesDisponibles());
-        intent.putExtra("coordinates", estaciones.get(position).getCoordinates());
-        intent.putExtra("ultmod", estaciones.get(position).getLastUpdated());
+        Uri uri = Uri.parse(noticias.get(position).getLink());
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
     public void mostrarLista() {
-        if (estaciones != null) {
-            adapter = new ArrayAdapter<Estacion>(this, android.R.layout.simple_list_item_1, estaciones);
-            lstvEstaciones.setAdapter(adapter);
+        if (noticias != null) {
+            adapter = new ArrayAdapter<Noticia>(this, android.R.layout.simple_list_item_1, noticias);
+            lstvListaTitulares.setAdapter(adapter);
         } else {
             Toast.makeText(getApplicationContext(), "Error al crear la lista", Toast.LENGTH_SHORT).show();
         }
@@ -72,7 +72,7 @@ public class Ejercicio3Activity extends Activity implements AdapterView.OnItemCl
                     @Override
                     public void onStart() {
                         // called before request is started
-                        progreso = new ProgressDialog(Ejercicio3Activity.this);
+                        progreso = new ProgressDialog(TitularesActivity.this);
                         progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progreso.setMessage("Conectando . . .");
                         progreso.show();
@@ -83,10 +83,10 @@ public class Ejercicio3Activity extends Activity implements AdapterView.OnItemCl
                         // called when response HTTP status is "200 OK"
                         progreso.dismiss();
                         try {
-                            estaciones = analisis.analizarEstaciones(response);
+                            noticias = analisis.analizarNoticias(response);
                             mostrarLista();
                         } catch (Exception e) {
-                            Toast.makeText(Ejercicio3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TitularesActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -94,7 +94,7 @@ public class Ejercicio3Activity extends Activity implements AdapterView.OnItemCl
                     public void onFailure(int statusCode, Header[] headers, String response, Throwable t) {
                         // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                         progreso.dismiss();
-                        Toast.makeText(Ejercicio3Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TitularesActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );

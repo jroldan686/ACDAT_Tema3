@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jrl.acdat.acdat_tema3" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -34,6 +34,14 @@
         <activity
             android:name=".Ejercicio4Activity"
             android:label="@string/title_activity_ejercicio4" >
+        </activity>
+        <activity
+            android:name=".EstacionActivity"
+            android:label="@string/title_activity_estacion" >
+        </activity>
+        <activity
+            android:name=".TitularesActivity"
+            android:label="@string/title_activity_titulares" >
         </activity>
     </application>
 

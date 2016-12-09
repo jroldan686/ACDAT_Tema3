@@ -9,4 +9,6 @@
     <string name="title_activity_ejercicio3">Ejercicio3Activity</string>
     <string name="title_activity_ejercicio4">Ejercicio4Activity</string>
     <string name="title_activity_ejercicio5">Ejercicio5Activity</string>
+    <string name="title_activity_estacion">EstacionActivity</string>
+    <string name="title_activity_titulares">TitularesActivity</string>
 </resources>

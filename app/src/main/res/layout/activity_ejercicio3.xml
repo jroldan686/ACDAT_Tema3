@@ -7,4 +7,17 @@
     android:orientation="vertical"
     tools:context="jrl.acdat.acdat_tema3.Ejercicio3Activity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estaciones Bizi Zaragoza"
+        android:id="@+id/txvEstacionesBizi"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold|italic"
+        android:textSize="20dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lstvEstaciones" />
 </LinearLayout>

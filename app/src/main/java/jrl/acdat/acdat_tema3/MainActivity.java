@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    Button btnEjercicio1, btnEjercicio2, btnEjercicio3, btnEjercicio4, btnEjercicio5;
+    Button btnEjercicio1, btnEjercicio2, btnEjercicio3, btnEjercicio4;
     Intent i;
 
     @Override
